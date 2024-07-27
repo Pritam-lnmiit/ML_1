@@ -1,16 +1,26 @@
-from setuptools import find_packages, setup
+from setuptools import find_packages,setup
+from typing import List
+HYPEN_E_DOT='-e .'
+def get_requirements(file_path:str)->List[str]:
+    '''
+    this function will return the list of requirements
+    '''
+    requirements=[]
+    with open(file_path) as file_obj:
+        requirements=file_obj.readlines()
+        requirements=[req.replace("\n","") for req in requirements]
 
-def get_requirements(file_path: str) -> list:
-    with open(file_path, 'r') as file_obj:
-        requirements = [line.strip() for line in file_obj.readlines() if line.strip()]
+        if HYPEN_E_DOT in requirements:
+            requirements.remove(HYPEN_E_DOT)
+    
     return requirements
 
 setup(
-    name='MLproject',
-    version='0.0.1',
-    author='Pritam',
-    author_email='22ume028@lnmiit.ac.in',
-    install_requires=get_requirements('requirements.txt'),
-    packages=find_packages(),
-)
+name='mlproject',
+version='0.0.1',
+author='pritam',
+author_email='22ume028@lnmiit.ac.in',
+packages=find_packages(),
+install_requires=get_requirements('requirements.txt')
 
+)

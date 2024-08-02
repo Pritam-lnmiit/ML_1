@@ -7,6 +7,9 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from src.pipeline.exception import CustomException
 from src.pipeline.logger import logging
+
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
@@ -55,4 +58,5 @@ if __name__=="__main__":
     obj=DataIngestion()
     train_data,test_data=obj.initiate_data_ingestion()
 
-    
+    data_tranformation=DataTransformation()
+    data_tranformation.initiate_data_transformation(train_data,test_data)
